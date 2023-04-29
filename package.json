@@ -4,6 +4,7 @@
   "description": "The application imitates functionality of a real keyboard, where user can print text in two languages, edit and delete it",
   "main": "index.js",
   "scripts": {
+    "style": "sass --watch styles/index.scss styles/index.css",
     "lint": "npx eslint ."
   },
   "repository": {
