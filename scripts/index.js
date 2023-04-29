@@ -27,6 +27,8 @@ const section = createBlockElement('section', 'section');
 const wrapper = createBlockElement('div', 'wrapper');
 const keyboard = createBlockElement('div', 'keyboard');
 const screenKeyboard = createBlockElement('textarea', 'screen');
+
+
 const keys = createBlockElement('ul', 'keys');
 
 const heading = createTextElement('h1', 'heading', 'RSS Virtual Keyboard');
@@ -343,3 +345,20 @@ keyArrowRight.create(row5, 'key_color_accent');
 
 const keyControlRight = new Key('control-right', 'Ctrl');
 keyControlRight.create(row5, 'key_color_accent');
+
+// Adding text in input
+const typeText = ({ code, key, target }) => {
+  if (target.classList.contains('screen')) return;
+
+  let { value } = screenKeyboard;
+
+  if (key.length === 1) value += key;
+  if (key === 'Backspace') value = value.slice(0, value.length - 1);
+  if (key === 'Enter') value += '\n';
+  if (key === 'Tab') value += '    ';
+
+  screenKeyboard.value = value;
+};
+
+// Event Handlers
+document.addEventListener('keydown', (evt) => typeText(evt));
