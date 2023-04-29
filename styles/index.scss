@@ -1,0 +1,163 @@
+// Variables
+$color-keyboard-bg: #d10a82;
+$color-keyboard-main: #ffd2da;
+$color-keyboard-secondary: #ffdee4;
+$color-keyboard-key: #e91e63;
+$color-keyboard-border: #9f0e67;
+$color-keyboard-accent: #fb9eaf;
+
+// Placeholders
+%flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// Mixins
+@mixin border($width: 3px, $style: solid, $color: $color-keyboard-border) {
+  border: $width $style $color;
+}
+
+// Styles
+body,
+h1,
+p,
+ul,
+textarea {
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+}
+
+html {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+
+    width: 100%;
+    height: 100%;
+
+    background-image: url(../assets/images/barbie-land.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    opacity: 0.4;
+  }
+}
+
+.page {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+  @extend %flex-column;
+  width: 704px;
+  margin: 0 auto;
+}
+
+.keyboard {
+  @extend %flex-column;
+  row-gap: 8px;
+  width: 100%;
+}
+
+.screen {
+  width: 100%;
+  height: 200px;
+  padding: 5px;
+
+  color: $color-keyboard-key;
+
+  @include border();
+  outline: none;
+  background-color: $color-keyboard-secondary;
+
+  &:focus {
+    border-color: $color-keyboard-bg;
+  }
+}
+
+.keys {
+  @extend %flex-column;
+  row-gap: 8px;
+  width: 100%;
+  padding: 5px;
+
+  background-color: $color-keyboard-bg;
+  @include border();
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+  }
+}
+
+.key {
+  @extend %flex-column;
+  width: 40px;
+  height: 100%;
+
+  color: $color-keyboard-key;
+
+  background-color: $color-keyboard-main;
+
+  cursor: pointer;
+
+  &_size_xs {
+    width: 44px;
+
+    font-weight: 600;
+
+    background-color: $color-keyboard-accent;
+  }
+
+  &_size_s {
+    width: 50px;
+
+    font-weight: 600;
+
+    background-color: $color-keyboard-accent;
+  }
+
+  &_size_m {
+    width: 86px;
+
+    font-weight: 600;
+
+    background-color: $color-keyboard-accent;
+  }
+
+  &_size_l {
+    width: 100px;
+
+    font-weight: 600;
+
+    background-color: $color-keyboard-accent;
+  }
+
+  &_size_xl {
+    width: 330px;
+  }
+
+  &_color_accent {
+    font-weight: 600;
+
+    background-color: $color-keyboard-accent;
+  }
+}
+
+.hidden {
+  display: none;
+}
