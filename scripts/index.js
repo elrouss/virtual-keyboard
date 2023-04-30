@@ -37,8 +37,8 @@ const screenKeyboard = createBlockElement('textarea', 'screen');
 const keys = createBlockElement('ul', 'keys');
 
 const heading = createTextElement('h1', 'heading', 'RSS Virtual Keyboard');
-const operationSystem = createTextElement('p', 'paragraph', 'The keyboard was created with the Macintosh operating system');
-const combinationKeys = createTextElement('p', 'paragraph', 'Combination for switching keyboard language: Ctrl + Space');
+const operationSystem = createTextElement('p', 'paragraph', 'The keyboard was created for the Windows operating system');
+const combinationKeys = createTextElement('p', 'paragraph', 'Combination for switching keyboard language: Ctrl(Opt) + Alt');
 
 // Inserting elements
 body.prepend(section);
@@ -450,7 +450,7 @@ const handleCapsLockOn = ({ key, target: { id } }) => {
     layoutRuKeysCaseDown.map((caps) => caps.classList.add('hidden'));
   }
 };
-
+// TODO: для клика caps должен сохраняться постоянным
 const handleCapsLockOff = ({ key, target }) => {
   if (key === 'CapsLock' || target) {
     layoutEnKeysCaseDown.map((caps) => caps.classList.remove('hidden'));

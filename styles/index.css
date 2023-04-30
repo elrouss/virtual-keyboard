@@ -43,15 +43,34 @@ html::before {
   font-family: "Arial", "Helvetica", sans-serif;
 }
 
+.section {
+  margin: 7vh 0;
+}
+
 .wrapper {
   width: 704px;
   margin: 0 auto;
 }
 
+.heading {
+  font-size: 4rem;
+  font-style: italic;
+  color: #d10a82;
+}
+
+.paragraph {
+  font-size: 1.7rem;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 133%;
+  color: #d10a82;
+}
+
 .keyboard {
   row-gap: 8px;
   width: 100%;
-  font-size: 1.4rem;
+  margin: 2vh;
+  font-size: 1.5rem;
 }
 
 .screen {
