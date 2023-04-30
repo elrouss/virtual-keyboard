@@ -363,30 +363,68 @@ const layoutRuKeysShiftCaps = layoutRu.map((layout) => layout.querySelector('.sh
 const typeText = ({ code, key, target }) => {
   const activeKey = keys.querySelector(`#${code}`);
   activeKey.classList.add(BASE_KEYS.includes(code) ? 'key-base' : 'active-heart');
+  // TODO: при клике на инпут идет пользовательская раскладка, а не моя ;(
+  let valueTyped;
+  if (!BASE_KEYS.includes(code)) {
+    valueTyped = activeKey
+      .querySelector('span.eng:not(.hidden), span.ru:not(.hidden)')
+      .querySelector('span:not(.hidden)')
+      .textContent;
+  }
 
   if (target.classList.contains('screen')) return;
 
   let { value } = screenKeyboard;
 
-  if (key.length === 1) value += key;
+  if (key.length === 1 && valueTyped) value += valueTyped;
   if (key === 'Backspace') value = value.slice(0, value.length - 1);
   if (key === 'Enter') value += '\n';
   if (key === 'Tab') value += '    ';
+  if (code === 'Space') value += ' ';
 
   screenKeyboard.value = value;
 };
 
+let keysPressed = [];
+
+const handleLayoutOn = ({ key }) => {
+  keysPressed.push(key);
+
+  if (keysPressed.includes('Control') && keysPressed.includes('Alt')) {
+    // TODO: временное решение. Переделать под localStorage пользователя?
+    layoutEn.forEach((spanEn) => {
+      if (spanEn.classList.contains('hidden')) {
+        spanEn.classList.remove('hidden');
+        layoutRu.map((spanRu) => spanRu.classList.add('hidden'));
+      } else {
+        spanEn.classList.add('hidden');
+        layoutRu.map((spanRu) => spanRu.classList.remove('hidden'));
+      }
+    });
+  }
+};
+
+const handleLayoutOff = () => {
+  keysPressed = [];
+};
+
 const handleShiftOn = ({ key }) => {
   if (key === 'Shift') {
-    layoutEnKeysCaseDown.map((caseUp) => caseUp.classList.add('hidden'));
+    layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
+    layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
+
     layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.remove('hidden'));
+    layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.remove('hidden'));
   }
 };
 
 const handleShiftOff = ({ key }) => {
   if (key === 'Shift') {
-    layoutEnKeysCaseDown.map((caseUp) => caseUp.classList.remove('hidden'));
+    layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.remove('hidden'));
+    layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.remove('hidden'));
+
     layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
+    layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
   }
 };
 
@@ -404,11 +442,13 @@ const removeActiveKeyAnimation = ({ code }) => {
 // Event Handlers
 document.addEventListener('keydown', (evt) => {
   typeText(evt);
+  handleLayoutOn(evt);
   handleShiftOn(evt);
 });
 
 document.addEventListener('keyup', (evt) => {
   // handleCapsLock(evt);
+  handleLayoutOff();
   handleShiftOff(evt);
   removeActiveKeyAnimation(evt);
 });
