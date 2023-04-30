@@ -1,6 +1,11 @@
 import Key from './Key.js';
 
 export default class KeySymbol extends Key {
+  constructor(name, keys) {
+    super(name);
+    this.keys = keys;
+  }
+
   createSymbol(row) {
     const key = this._createElement('div', 'key');
 
@@ -9,7 +14,7 @@ export default class KeySymbol extends Key {
   }
 
   createSymbolLayout(layout, char, altChar) {
-    const parent = document.querySelector(`#${this.name}`);
+    const parent = this.keys.querySelector(`#${this.name}`);
     const { children } = parent;
 
     const element = this._createElement('span', layout);
