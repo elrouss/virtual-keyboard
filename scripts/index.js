@@ -6,6 +6,11 @@ import { BASE_KEYS } from './utils/constants.js';
 const { body } = document;
 body.className = 'page';
 
+let language = localStorage.getItem('lang');
+
+if (!language) localStorage.setItem('lang', 'en');
+language = localStorage.getItem('lang');
+
 // Section with a keyboard
 const createBlockElement = (tag, style) => {
   const element = document.createElement(tag);
@@ -56,69 +61,69 @@ const [row1, row2, row3, row4, row5] = rows;
 
 // Creating keys
 // First row
-const keyBackquote = new KeySymbol('Backquote', keys);
+const keyBackquote = new KeySymbol('Backquote', keys, language);
 keyBackquote.createSymbol(row1);
-keyBackquote.createSymbolLayout('eng', '`', '~');
+keyBackquote.createSymbolLayout('en', '`', '~');
 keyBackquote.createSymbolLayout('ru', 'ё', 'Ё');
 
-const keyDigit1 = new KeySymbol('Digit1', keys);
+const keyDigit1 = new KeySymbol('Digit1', keys, language);
 keyDigit1.createSymbol(row1);
-keyDigit1.createSymbolLayout('eng', '1', '!');
+keyDigit1.createSymbolLayout('en', '1', '!');
 keyDigit1.createSymbolLayout('ru', '1', '!');
 
-const keyDigit2 = new KeySymbol('Digit2', keys);
+const keyDigit2 = new KeySymbol('Digit2', keys, language);
 keyDigit2.createSymbol(row1);
-keyDigit2.createSymbolLayout('eng', '2', '@');
+keyDigit2.createSymbolLayout('en', '2', '@');
 keyDigit2.createSymbolLayout('ru', '2', '"');
 
-const keyDigit3 = new KeySymbol('Digit3', keys);
+const keyDigit3 = new KeySymbol('Digit3', keys, language);
 keyDigit3.createSymbol(row1);
-keyDigit3.createSymbolLayout('eng', '3', '#');
+keyDigit3.createSymbolLayout('en', '3', '#');
 keyDigit3.createSymbolLayout('ru', '3', '№');
 
-const keyDigit4 = new KeySymbol('Digit4', keys);
+const keyDigit4 = new KeySymbol('Digit4', keys, language);
 keyDigit4.createSymbol(row1);
-keyDigit4.createSymbolLayout('eng', '4', '$');
+keyDigit4.createSymbolLayout('en', '4', '$');
 keyDigit4.createSymbolLayout('ru', '4', ';');
 
-const keyDigit5 = new KeySymbol('Digit5', keys);
+const keyDigit5 = new KeySymbol('Digit5', keys, language);
 keyDigit5.createSymbol(row1);
-keyDigit5.createSymbolLayout('eng', '5', '%');
+keyDigit5.createSymbolLayout('en', '5', '%');
 keyDigit5.createSymbolLayout('ru', '5', '%');
 
-const keyDigit6 = new KeySymbol('Digit6', keys);
+const keyDigit6 = new KeySymbol('Digit6', keys, language);
 keyDigit6.createSymbol(row1);
-keyDigit6.createSymbolLayout('eng', '6', '^');
+keyDigit6.createSymbolLayout('en', '6', '^');
 keyDigit6.createSymbolLayout('ru', '6', ':');
 
-const keyDigit7 = new KeySymbol('Digit7', keys);
+const keyDigit7 = new KeySymbol('Digit7', keys, language);
 keyDigit7.createSymbol(row1);
-keyDigit7.createSymbolLayout('eng', '7', '&');
+keyDigit7.createSymbolLayout('en', '7', '&');
 keyDigit7.createSymbolLayout('ru', '7', '?');
 
-const keyDigit8 = new KeySymbol('Digit8', keys);
+const keyDigit8 = new KeySymbol('Digit8', keys, language);
 keyDigit8.createSymbol(row1);
-keyDigit8.createSymbolLayout('eng', '8', '*');
+keyDigit8.createSymbolLayout('en', '8', '*');
 keyDigit8.createSymbolLayout('ru', '8', '*');
 
-const keyDigit9 = new KeySymbol('Digit9', keys);
+const keyDigit9 = new KeySymbol('Digit9', keys, language);
 keyDigit9.createSymbol(row1);
-keyDigit9.createSymbolLayout('eng', '9', '(');
+keyDigit9.createSymbolLayout('en', '9', '(');
 keyDigit9.createSymbolLayout('ru', '9', '(');
 
-const keyDigit0 = new KeySymbol('Digit0', keys);
+const keyDigit0 = new KeySymbol('Digit0', keys, language);
 keyDigit0.createSymbol(row1);
-keyDigit0.createSymbolLayout('eng', '0', ')');
+keyDigit0.createSymbolLayout('en', '0', ')');
 keyDigit0.createSymbolLayout('ru', '0', ')');
 
-const keyMinus = new KeySymbol('Minus', keys);
+const keyMinus = new KeySymbol('Minus', keys, language);
 keyMinus.createSymbol(row1);
-keyMinus.createSymbolLayout('eng', '-', '_');
+keyMinus.createSymbolLayout('en', '-', '_');
 keyMinus.createSymbolLayout('ru', '-', '_');
 
-const keyEqual = new KeySymbol('Equal', keys);
+const keyEqual = new KeySymbol('Equal', keys, language);
 keyEqual.createSymbol(row1);
-keyEqual.createSymbolLayout('eng', '=', '+');
+keyEqual.createSymbolLayout('en', '=', '+');
 keyEqual.createSymbolLayout('ru', '=', '+');
 
 const keyBackspace = new Key('Backspace', 'Backspace');
@@ -128,131 +133,131 @@ keyBackspace.create(row1, 'key_size_l');
 const keyTab = new Key('Tab', 'Tab');
 keyTab.create(row2, 'key_size_s');
 
-const keyQ = new KeySymbol('KeyQ', keys);
+const keyQ = new KeySymbol('KeyQ', keys, language);
 keyQ.createSymbol(row2);
-keyQ.createSymbolLayout('eng', 'q', 'Q');
+keyQ.createSymbolLayout('en', 'q', 'Q');
 keyQ.createSymbolLayout('ru', 'й', 'Й');
 
-const keyW = new KeySymbol('KeyW', keys);
+const keyW = new KeySymbol('KeyW', keys, language);
 keyW.createSymbol(row2);
-keyW.createSymbolLayout('eng', 'w', 'w');
+keyW.createSymbolLayout('en', 'w', 'w');
 keyW.createSymbolLayout('ru', 'ц', 'Ц');
 
-const keyE = new KeySymbol('KeyE', keys);
+const keyE = new KeySymbol('KeyE', keys, language);
 keyE.createSymbol(row2);
-keyE.createSymbolLayout('eng', 'e', 'E');
+keyE.createSymbolLayout('en', 'e', 'E');
 keyE.createSymbolLayout('ru', 'у', 'У');
 
-const keyR = new KeySymbol('KeyR', keys);
+const keyR = new KeySymbol('KeyR', keys, language);
 keyR.createSymbol(row2);
-keyR.createSymbolLayout('eng', 'r', 'R');
+keyR.createSymbolLayout('en', 'r', 'R');
 keyR.createSymbolLayout('ru', 'к', 'К');
 
-const keyT = new KeySymbol('KeyT', keys);
+const keyT = new KeySymbol('KeyT', keys, language);
 keyT.createSymbol(row2);
-keyT.createSymbolLayout('eng', 't', 'T');
+keyT.createSymbolLayout('en', 't', 'T');
 keyT.createSymbolLayout('ru', 'е', 'Е');
 
-const keyY = new KeySymbol('KeyY', keys);
+const keyY = new KeySymbol('KeyY', keys, language);
 keyY.createSymbol(row2);
-keyY.createSymbolLayout('eng', 'y', 'Y');
+keyY.createSymbolLayout('en', 'y', 'Y');
 keyY.createSymbolLayout('ru', 'н', 'Н');
 
-const keyU = new KeySymbol('KeyU', keys);
+const keyU = new KeySymbol('KeyU', keys, language);
 keyU.createSymbol(row2);
-keyU.createSymbolLayout('eng', 'u', 'U');
-keyU.createSymbolLayout('ru', 'н', 'Н');
+keyU.createSymbolLayout('en', 'u', 'U');
+keyU.createSymbolLayout('ru', 'г', 'Г');
 
-const keyI = new KeySymbol('KeyI', keys);
+const keyI = new KeySymbol('KeyI', keys, language);
 keyI.createSymbol(row2);
-keyI.createSymbolLayout('eng', 'i', 'I');
+keyI.createSymbolLayout('en', 'i', 'I');
 keyI.createSymbolLayout('ru', 'ш', 'Ш');
 
-const keyO = new KeySymbol('KeyO', keys);
+const keyO = new KeySymbol('KeyO', keys, language);
 keyO.createSymbol(row2);
-keyO.createSymbolLayout('eng', 'o', 'O');
+keyO.createSymbolLayout('en', 'o', 'O');
 keyO.createSymbolLayout('ru', 'щ', 'Щ');
 
-const keyP = new KeySymbol('KeyP', keys);
+const keyP = new KeySymbol('KeyP', keys, language);
 keyP.createSymbol(row2);
-keyP.createSymbolLayout('eng', 'p', 'P');
+keyP.createSymbolLayout('en', 'p', 'P');
 keyP.createSymbolLayout('ru', 'з', 'З');
 
-const keyBracketLeft = new KeySymbol('BracketLeft', keys);
+const keyBracketLeft = new KeySymbol('BracketLeft', keys, language);
 keyBracketLeft.createSymbol(row2);
-keyBracketLeft.createSymbolLayout('eng', '[', '{');
+keyBracketLeft.createSymbolLayout('en', '[', '{');
 keyBracketLeft.createSymbolLayout('ru', 'х', 'Х');
 
-const keyBracketRight = new KeySymbol('BracketRight', keys);
+const keyBracketRight = new KeySymbol('BracketRight', keys, language);
 keyBracketRight.createSymbol(row2);
-keyBracketRight.createSymbolLayout('eng', ']', '}');
+keyBracketRight.createSymbolLayout('en', ']', '}');
 keyBracketRight.createSymbolLayout('ru', 'ъ', 'Ъ');
 
-const keyBackslash = new KeySymbol('Backslash', keys);
+const keyBackslash = new KeySymbol('Backslash', keys, language);
 keyBackslash.createSymbol(row2);
-keyBackslash.createSymbolLayout('eng', '\\', '|');
+keyBackslash.createSymbolLayout('en', '\\', '|');
 keyBackslash.createSymbolLayout('ru', '\\', '/');
 
-const keyDelete = new Key('Delete', 'Del', keys);
+const keyDelete = new Key('Delete', 'Del', keys, language);
 keyDelete.create(row2, 'key_size_xs');
 
 // Third row
-const keyCapsLock = new Key('CapsLock', 'CapsLock', keys);
+const keyCapsLock = new Key('CapsLock', 'CapsLock', keys, language);
 keyCapsLock.create(row3, 'key_size_l');
 
-const keyA = new KeySymbol('KeyA', keys);
+const keyA = new KeySymbol('KeyA', keys, language);
 keyA.createSymbol(row3);
-keyA.createSymbolLayout('eng', 'a', 'A');
+keyA.createSymbolLayout('en', 'a', 'A');
 keyA.createSymbolLayout('ru', 'ф', 'Ф');
 
-const keyS = new KeySymbol('KeyS', keys);
+const keyS = new KeySymbol('KeyS', keys, language);
 keyS.createSymbol(row3);
-keyS.createSymbolLayout('eng', 's', 'S');
+keyS.createSymbolLayout('en', 's', 'S');
 keyS.createSymbolLayout('ru', 'ы', 'Ы');
 
-const keyD = new KeySymbol('KeyD', keys);
+const keyD = new KeySymbol('KeyD', keys, language);
 keyD.createSymbol(row3);
-keyD.createSymbolLayout('eng', 'd', 'D');
+keyD.createSymbolLayout('en', 'd', 'D');
 keyD.createSymbolLayout('ru', 'в', 'В');
 
-const keyF = new KeySymbol('KeyF', keys);
+const keyF = new KeySymbol('KeyF', keys, language);
 keyF.createSymbol(row3);
-keyF.createSymbolLayout('eng', 'f', 'F');
+keyF.createSymbolLayout('en', 'f', 'F');
 keyF.createSymbolLayout('ru', 'а', 'А');
 
-const keyG = new KeySymbol('KeyG', keys);
+const keyG = new KeySymbol('KeyG', keys, language);
 keyG.createSymbol(row3);
-keyG.createSymbolLayout('eng', 'g', 'G');
+keyG.createSymbolLayout('en', 'g', 'G');
 keyG.createSymbolLayout('ru', 'п', 'П');
 
-const keyH = new KeySymbol('KeyH', keys);
+const keyH = new KeySymbol('KeyH', keys, language);
 keyH.createSymbol(row3);
-keyH.createSymbolLayout('eng', 'h', 'H');
+keyH.createSymbolLayout('en', 'h', 'H');
 keyH.createSymbolLayout('ru', 'р', 'Р');
 
-const keyJ = new KeySymbol('KeyJ', keys);
+const keyJ = new KeySymbol('KeyJ', keys, language);
 keyJ.createSymbol(row3);
-keyJ.createSymbolLayout('eng', 'j', 'J');
+keyJ.createSymbolLayout('en', 'j', 'J');
 keyJ.createSymbolLayout('ru', 'о', 'О');
 
-const keyK = new KeySymbol('KeyK', keys);
+const keyK = new KeySymbol('KeyK', keys, language);
 keyK.createSymbol(row3);
-keyK.createSymbolLayout('eng', 'k', 'K');
+keyK.createSymbolLayout('en', 'k', 'K');
 keyK.createSymbolLayout('ru', 'л', 'Л');
 
-const keyL = new KeySymbol('KeyL', keys);
+const keyL = new KeySymbol('KeyL', keys, language);
 keyL.createSymbol(row3);
-keyL.createSymbolLayout('eng', 'l', 'L');
+keyL.createSymbolLayout('en', 'l', 'L');
 keyL.createSymbolLayout('ru', 'д', 'Д');
 
-const keySemicolon = new KeySymbol('Semicolon', keys);
+const keySemicolon = new KeySymbol('Semicolon', keys, language);
 keySemicolon.createSymbol(row3);
-keySemicolon.createSymbolLayout('eng', ';', ':');
+keySemicolon.createSymbolLayout('en', ';', ':');
 keySemicolon.createSymbolLayout('ru', 'ж', 'Ж');
 
-const keyQuote = new KeySymbol('Quote', keys);
+const keyQuote = new KeySymbol('Quote', keys, language);
 keyQuote.createSymbol(row3);
-keyQuote.createSymbolLayout('eng', '\'', '"');
+keyQuote.createSymbolLayout('en', '\'', '"');
 keyQuote.createSymbolLayout('ru', 'э', 'Э');
 
 const keyEnter = new Key('Enter', 'Enter');
@@ -262,54 +267,54 @@ keyEnter.create(row3, 'key_size_m');
 const keyShiftLeft = new Key('ShiftLeft', 'Shift');
 keyShiftLeft.create(row4, 'key_size_l');
 
-const keyZ = new KeySymbol('KeyZ', keys);
+const keyZ = new KeySymbol('KeyZ', keys, language);
 keyZ.createSymbol(row4);
-keyZ.createSymbolLayout('eng', 'z', 'Z');
+keyZ.createSymbolLayout('en', 'z', 'Z');
 keyZ.createSymbolLayout('ru', 'я', 'Я');
 
-const keyX = new KeySymbol('KeyX', keys);
+const keyX = new KeySymbol('KeyX', keys, language);
 keyX.createSymbol(row4);
-keyX.createSymbolLayout('eng', 'x', 'X');
+keyX.createSymbolLayout('en', 'x', 'X');
 keyX.createSymbolLayout('ru', 'ч', 'Ч');
 
-const keyC = new KeySymbol('KeyC', keys);
+const keyC = new KeySymbol('KeyC', keys, language);
 keyC.createSymbol(row4);
-keyC.createSymbolLayout('eng', 'c', 'C');
+keyC.createSymbolLayout('en', 'c', 'C');
 keyC.createSymbolLayout('ru', 'с', 'С');
 
-const keyV = new KeySymbol('KeyV', keys);
+const keyV = new KeySymbol('KeyV', keys, language);
 keyV.createSymbol(row4);
-keyV.createSymbolLayout('eng', 'v', 'V');
+keyV.createSymbolLayout('en', 'v', 'V');
 keyV.createSymbolLayout('ru', 'м', 'М');
 
-const keyB = new KeySymbol('KeyB', keys);
+const keyB = new KeySymbol('KeyB', keys, language);
 keyB.createSymbol(row4);
-keyB.createSymbolLayout('eng', 'b', 'B');
+keyB.createSymbolLayout('en', 'b', 'B');
 keyB.createSymbolLayout('ru', 'и', 'И');
 
-const keyN = new KeySymbol('KeyN', keys);
+const keyN = new KeySymbol('KeyN', keys, language);
 keyN.createSymbol(row4);
-keyN.createSymbolLayout('eng', 'n', 'N');
+keyN.createSymbolLayout('en', 'n', 'N');
 keyN.createSymbolLayout('ru', 'т', 'Т');
 
-const keyM = new KeySymbol('KeyM', keys);
+const keyM = new KeySymbol('KeyM', keys, language);
 keyM.createSymbol(row4);
-keyM.createSymbolLayout('eng', 'm', 'M');
+keyM.createSymbolLayout('en', 'm', 'M');
 keyM.createSymbolLayout('ru', 'ь', 'Ь');
 
-const keyComma = new KeySymbol('Comma', keys);
+const keyComma = new KeySymbol('Comma', keys, language);
 keyComma.createSymbol(row4);
-keyComma.createSymbolLayout('eng', ',', '<');
+keyComma.createSymbolLayout('en', ',', '<');
 keyComma.createSymbolLayout('ru', 'б', 'Б');
 
-const keyDot = new KeySymbol('Period', keys);
+const keyDot = new KeySymbol('Period', keys, language);
 keyDot.createSymbol(row4);
-keyDot.createSymbolLayout('eng', '.', '>');
+keyDot.createSymbolLayout('en', '.', '>');
 keyDot.createSymbolLayout('ru', 'ю', 'Ю');
 
-const keySlash = new KeySymbol('Slash', keys);
+const keySlash = new KeySymbol('Slash', keys, language);
 keySlash.createSymbol(row4);
-keySlash.createSymbolLayout('eng', '/', '?');
+keySlash.createSymbolLayout('en', '/', '?');
 keySlash.createSymbolLayout('ru', '.', ',');
 
 const keyArrowUp = new Key('ArrowUp', '▲');
@@ -347,7 +352,7 @@ const keyControlRight = new Key('ControlRight', 'Ctrl');
 keyControlRight.create(row5, 'key_color_accent');
 
 // Finding collections of keys
-const layoutEn = Array.from(keys.querySelectorAll('.eng'));
+const layoutEn = Array.from(keys.querySelectorAll('.en'));
 const layoutEnKeysCaseDown = layoutEn.map((layout) => layout.querySelector('.case-down'));
 const layoutEnKeysCaseUp = layoutEn.map((layout) => layout.querySelector('.case-up'));
 const layoutEnKeysCaps = layoutEn.map((layout) => layout.querySelector('.caps'));
@@ -367,7 +372,7 @@ const typeText = ({ code, key, target }) => {
   let valueTyped;
   if (!BASE_KEYS.includes(code)) {
     valueTyped = activeKey
-      .querySelector('span.eng:not(.hidden), span.ru:not(.hidden)')
+      .querySelector('span.en:not(.hidden), span.ru:not(.hidden)')
       .querySelector('span:not(.hidden)')
       .textContent;
   }
@@ -391,14 +396,19 @@ const handleLayoutOn = ({ key }) => {
   keysPressed.push(key);
 
   if (keysPressed.includes('Control') && keysPressed.includes('Alt')) {
-    // TODO: временное решение. Переделать под localStorage пользователя?
+    language = localStorage.getItem('lang');
+
     layoutEn.forEach((spanEn) => {
-      if (spanEn.classList.contains('hidden')) {
+      if (language !== 'en') {
         spanEn.classList.remove('hidden');
         layoutRu.map((spanRu) => spanRu.classList.add('hidden'));
+
+        localStorage.setItem('lang', 'en');
       } else {
         spanEn.classList.add('hidden');
         layoutRu.map((spanRu) => spanRu.classList.remove('hidden'));
+
+        localStorage.setItem('lang', 'ru');
       }
     });
   }

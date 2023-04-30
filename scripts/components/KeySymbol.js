@@ -1,9 +1,10 @@
 import Key from './Key.js';
 
 export default class KeySymbol extends Key {
-  constructor(name, keys) {
+  constructor(name, keys, lang) {
     super(name);
     this.keys = keys;
+    this.lang = lang;
   }
 
   createSymbol(row) {
@@ -15,10 +16,11 @@ export default class KeySymbol extends Key {
 
   createSymbolLayout(layout, char, altChar) {
     const parent = this.keys.querySelector(`#${this.name}`);
-    const { children } = parent;
 
     const element = this._createElement('span', layout);
-    if (children.length) element.classList.add('hidden');
+    if (this.lang !== element.className) {
+      element.classList.add('hidden');
+    }
 
     const caseDown = this._createElement('span', 'case-down');
     caseDown.textContent = char;
