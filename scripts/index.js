@@ -60,6 +60,7 @@ const rows = keys.querySelectorAll('.keys__row');
 const [row1, row2, row3, row4, row5] = rows;
 
 // Creating keys
+// TODO: вынести данные в объект и сгенерировать клавиши циклом
 // First row
 const keyBackquote = new KeySymbol('Backquote', keys, language);
 keyBackquote.createSymbol(row1);
@@ -365,6 +366,7 @@ const layoutRuKeysCaps = layoutRu.map((layout) => layout.querySelector('.caps'))
 const layoutRuKeysShiftCaps = layoutRu.map((layout) => layout.querySelector('.shift-caps'));
 
 // Typing with keyboard
+// TODO: Caps + Shift = BUG!!! (shift-caps)
 const typeText = ({ code, key, target }) => {
   const activeKey = keys.querySelector(`#${code}`);
   activeKey.classList.add(BASE_KEYS.includes(code) ? 'key-base' : 'active-heart');
@@ -418,8 +420,9 @@ const handleLayoutOff = () => {
   keysPressed = [];
 };
 
-const handleShiftOn = ({ key }) => {
-  if (key === 'Shift') {
+// TODO: функции ниже объединить?
+const handleShiftOn = ({ key, target: { id } }) => {
+  if (key === 'Shift' || id.startsWith('Shift')) {
     layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
     layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
 
@@ -428,8 +431,8 @@ const handleShiftOn = ({ key }) => {
   }
 };
 
-const handleShiftOff = ({ key }) => {
-  if (key === 'Shift') {
+const handleShiftOff = ({ key, target }) => {
+  if (key === 'Shift' || target) {
     layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.remove('hidden'));
     layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.remove('hidden'));
 
@@ -438,9 +441,81 @@ const handleShiftOff = ({ key }) => {
   }
 };
 
-// const handleCapsLock = (evt) => {
-//   console.log(evt)
-// }
+const handleCapsLockOn = ({ key, target: { id } }) => {
+  if (key === 'CapsLock' || id === 'CapsLock') {
+    layoutEnKeysCaps.map((caps) => caps.classList.remove('hidden'));
+    layoutRuKeysCaps.map((caps) => caps.classList.remove('hidden'));
+
+    layoutEnKeysCaseDown.map((caps) => caps.classList.add('hidden'));
+    layoutRuKeysCaseDown.map((caps) => caps.classList.add('hidden'));
+  }
+};
+
+const handleCapsLockOff = ({ key, target }) => {
+  if (key === 'CapsLock' || target) {
+    layoutEnKeysCaseDown.map((caps) => caps.classList.remove('hidden'));
+    layoutRuKeysCaseDown.map((caps) => caps.classList.remove('hidden'));
+
+    layoutEnKeysCaps.map((caps) => caps.classList.add('hidden'));
+    layoutRuKeysCaps.map((caps) => caps.classList.add('hidden'));
+  }
+};
+
+let targetClicked;
+let targetBaseClicked;
+// console.log(screenKeyboard)
+
+const handleKeyClickOn = ({ target }) => {
+  const closest = target.closest('.key');
+  const { id } = target;
+  // const cursorInputStart = screenKeyboard.selectionStart;
+  // const cursorInputEnd = screenKeyboard.selectionEnd;
+  let text;
+  // console.log(cursorInputStart, cursorInputEnd)
+  if (
+    !BASE_KEYS.includes(id)
+    && target.className !== 'keys'
+    && target.className !== 'keys__row'
+  ) {
+    text = closest
+      .querySelector('span.en:not(.hidden), span.ru:not(.hidden)')
+      .querySelector('span:not(.hidden)')
+      .textContent;
+  }
+
+  let { value } = screenKeyboard;
+
+  if (text) {
+    closest.classList.add('active-heart');
+    targetClicked = closest;
+    value += text;
+  }
+
+  if (BASE_KEYS.includes(id)) {
+    closest.classList.add('key-base');
+    targetBaseClicked = closest;
+  }
+
+  if (id === 'Backspace') value = value.slice(0, value.length - 1);
+  // if (id === 'Delete') console.log('test');
+  if (id === 'Enter') value += '\n';
+  if (id === 'Tab') value += '    ';
+  if (id === 'Space') value += ' ';
+
+  screenKeyboard.value = value;
+};
+
+const handleKeyClickOff = () => {
+  if (targetBaseClicked) {
+    targetBaseClicked.classList.remove('key-base');
+    targetBaseClicked = undefined;
+  }
+
+  if (targetClicked && targetClicked.classList.contains('active-heart')) {
+    targetClicked.classList.remove('active-heart');
+    targetClicked = undefined;
+  }
+};
 
 const removeActiveKeyAnimation = ({ code }) => {
   keys
@@ -453,12 +528,25 @@ const removeActiveKeyAnimation = ({ code }) => {
 document.addEventListener('keydown', (evt) => {
   typeText(evt);
   handleLayoutOn(evt);
+  handleCapsLockOn(evt);
   handleShiftOn(evt);
 });
 
 document.addEventListener('keyup', (evt) => {
-  // handleCapsLock(evt);
   handleLayoutOff();
+  handleCapsLockOff(evt);
   handleShiftOff(evt);
   removeActiveKeyAnimation(evt);
+});
+
+keys.addEventListener('mousedown', (evt) => {
+  handleKeyClickOn(evt);
+  handleCapsLockOn(evt);
+  handleShiftOn(evt);
+});
+
+document.addEventListener('mouseup', (evt) => {
+  handleKeyClickOff();
+  handleCapsLockOff(evt);
+  handleShiftOff(evt);
 });
