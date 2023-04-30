@@ -1,4 +1,4 @@
-export const BASE_KEYS = [
+const BASE_KEYS = [
   'Tab',
   'CapsLock',
   'ShiftLeft',
@@ -18,3 +18,5 @@ export const BASE_KEYS = [
   'Delete',
   'Backspace',
 ];
+
+export default BASE_KEYS;
