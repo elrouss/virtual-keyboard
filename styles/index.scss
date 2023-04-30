@@ -5,6 +5,7 @@ $color-keyboard-secondary: #ffdee4;
 $color-keyboard-key: #e91e63;
 $color-keyboard-border: #9f0e67;
 $color-keyboard-accent: #fb9eaf;
+$color-keyboard-animation: #ffbbc7;
 
 // Placeholders
 %flex-column {
@@ -12,6 +13,10 @@ $color-keyboard-accent: #fb9eaf;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+%animation {
+  transition: all 0.25s ease;
 }
 
 // Mixins
@@ -120,6 +125,13 @@ html {
 
   cursor: pointer;
 
+  @extend %animation;
+
+  > * {
+    position: relative;
+    z-index: 100;
+  }
+
   &_size_xs {
     width: 44px;
 
@@ -160,6 +172,45 @@ html {
     font-weight: 600;
 
     background-color: $color-keyboard-accent;
+  }
+}
+
+.key-base {
+  border-radius: 50%;
+}
+
+.active-heart {
+  position: relative;
+
+  background-color: $color-keyboard-bg;
+
+  transform: rotate(360deg);
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+
+    width: 25px;
+    height: 100%;
+
+    border-radius: 25px 25px 0 0;
+    background-color: $color-keyboard-animation;
+  }
+
+  &::before {
+    left: 19.5px;
+
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+  }
+
+  &::after {
+    left: -4.5px;
+
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
   }
 }
 

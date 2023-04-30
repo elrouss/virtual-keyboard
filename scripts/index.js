@@ -1,6 +1,8 @@
 import Key from './components/Key.js';
 import KeySymbol from './components/KeySymbol.js';
 
+import { BASE_KEYS } from './utils/constants.js';
+
 const { body } = document;
 body.className = 'page';
 
@@ -56,299 +58,303 @@ const [row1, row2, row3, row4, row5] = rows;
 
 // Creating keys
 // First row
-const keyBackquote = new KeySymbol('backquote');
+const keyBackquote = new KeySymbol('Backquote');
 keyBackquote.createSymbol(row1);
 keyBackquote.createSymbolLayout('eng', '`', '~');
 keyBackquote.createSymbolLayout('ru', 'ё', 'Ё');
 
-const keyDigit1 = new KeySymbol('digit-1');
+const keyDigit1 = new KeySymbol('Digit1');
 keyDigit1.createSymbol(row1);
 keyDigit1.createSymbolLayout('eng', '1', '!');
 keyDigit1.createSymbolLayout('ru', '1', '!');
 
-const keyDigit2 = new KeySymbol('digit-2');
+const keyDigit2 = new KeySymbol('Digit2');
 keyDigit2.createSymbol(row1);
 keyDigit2.createSymbolLayout('eng', '2', '@');
 keyDigit2.createSymbolLayout('ru', '2', '"');
 
-const keyDigit3 = new KeySymbol('digit-3');
+const keyDigit3 = new KeySymbol('Digit3');
 keyDigit3.createSymbol(row1);
 keyDigit3.createSymbolLayout('eng', '3', '#');
 keyDigit3.createSymbolLayout('ru', '3', '№');
 
-const keyDigit4 = new KeySymbol('digit-4');
+const keyDigit4 = new KeySymbol('Digit4');
 keyDigit4.createSymbol(row1);
 keyDigit4.createSymbolLayout('eng', '4', '$');
 keyDigit4.createSymbolLayout('ru', '4', ';');
 
-const keyDigit5 = new KeySymbol('digit-5');
+const keyDigit5 = new KeySymbol('Digit5');
 keyDigit5.createSymbol(row1);
 keyDigit5.createSymbolLayout('eng', '5', '%');
 keyDigit5.createSymbolLayout('ru', '5', '%');
 
-const keyDigit6 = new KeySymbol('digit-6');
+const keyDigit6 = new KeySymbol('Digit6');
 keyDigit6.createSymbol(row1);
 keyDigit6.createSymbolLayout('eng', '6', '^');
 keyDigit6.createSymbolLayout('ru', '6', ':');
 
-const keyDigit7 = new KeySymbol('digit-7');
+const keyDigit7 = new KeySymbol('Digit7');
 keyDigit7.createSymbol(row1);
 keyDigit7.createSymbolLayout('eng', '7', '&');
 keyDigit7.createSymbolLayout('ru', '7', '?');
 
-const keyDigit8 = new KeySymbol('digit-8');
+const keyDigit8 = new KeySymbol('Digit8');
 keyDigit8.createSymbol(row1);
 keyDigit8.createSymbolLayout('eng', '8', '*');
 keyDigit8.createSymbolLayout('ru', '8', '*');
 
-const keyDigit9 = new KeySymbol('digit-9');
+const keyDigit9 = new KeySymbol('Digit9');
 keyDigit9.createSymbol(row1);
 keyDigit9.createSymbolLayout('eng', '9', '(');
 keyDigit9.createSymbolLayout('ru', '9', '(');
 
-const keyDigit0 = new KeySymbol('digit-0');
+const keyDigit0 = new KeySymbol('Digit0');
 keyDigit0.createSymbol(row1);
 keyDigit0.createSymbolLayout('eng', '0', ')');
 keyDigit0.createSymbolLayout('ru', '0', ')');
 
-const keyMinus = new KeySymbol('minus');
+const keyMinus = new KeySymbol('Minus');
 keyMinus.createSymbol(row1);
 keyMinus.createSymbolLayout('eng', '-', '_');
 keyMinus.createSymbolLayout('ru', '-', '_');
 
-const keyEqual = new KeySymbol('equal');
+const keyEqual = new KeySymbol('Equal');
 keyEqual.createSymbol(row1);
 keyEqual.createSymbolLayout('eng', '=', '+');
 keyEqual.createSymbolLayout('ru', '=', '+');
 
-const keyBackspace = new Key('backspace', 'Backspace');
+const keyBackspace = new Key('Backspace', 'Backspace');
 keyBackspace.create(row1, 'key_size_l');
 
 // Second row
-const keyTab = new Key('tab', 'Tab');
+const keyTab = new Key('Tab', 'Tab');
 keyTab.create(row2, 'key_size_s');
 
-const keyQ = new KeySymbol('key-q');
+const keyQ = new KeySymbol('KeyQ');
 keyQ.createSymbol(row2);
 keyQ.createSymbolLayout('eng', 'q', 'Q');
 keyQ.createSymbolLayout('ru', 'й', 'Й');
 
-const keyW = new KeySymbol('key-w');
+const keyW = new KeySymbol('KeyW');
 keyW.createSymbol(row2);
 keyW.createSymbolLayout('eng', 'w', 'w');
 keyW.createSymbolLayout('ru', 'ц', 'Ц');
 
-const keyE = new KeySymbol('key-e');
+const keyE = new KeySymbol('KeyE');
 keyE.createSymbol(row2);
 keyE.createSymbolLayout('eng', 'e', 'E');
 keyE.createSymbolLayout('ru', 'у', 'У');
 
-const keyR = new KeySymbol('key-r');
+const keyR = new KeySymbol('KeyR');
 keyR.createSymbol(row2);
 keyR.createSymbolLayout('eng', 'r', 'R');
 keyR.createSymbolLayout('ru', 'к', 'К');
 
-const keyT = new KeySymbol('key-t');
+const keyT = new KeySymbol('KeyT');
 keyT.createSymbol(row2);
 keyT.createSymbolLayout('eng', 't', 'T');
 keyT.createSymbolLayout('ru', 'е', 'Е');
 
-const keyY = new KeySymbol('key-y');
+const keyY = new KeySymbol('KeyY');
 keyY.createSymbol(row2);
 keyY.createSymbolLayout('eng', 'y', 'Y');
 keyY.createSymbolLayout('ru', 'н', 'Н');
 
-const keyU = new KeySymbol('key-u');
+const keyU = new KeySymbol('KeyU');
 keyU.createSymbol(row2);
 keyU.createSymbolLayout('eng', 'u', 'U');
 keyU.createSymbolLayout('ru', 'н', 'Н');
 
-const keyI = new KeySymbol('key-i');
+const keyI = new KeySymbol('KeyI');
 keyI.createSymbol(row2);
 keyI.createSymbolLayout('eng', 'i', 'I');
 keyI.createSymbolLayout('ru', 'ш', 'Ш');
 
-const keyO = new KeySymbol('key-o');
+const keyO = new KeySymbol('KeyO');
 keyO.createSymbol(row2);
 keyO.createSymbolLayout('eng', 'o', 'O');
 keyO.createSymbolLayout('ru', 'щ', 'Щ');
 
-const keyP = new KeySymbol('key-p');
+const keyP = new KeySymbol('KeyP');
 keyP.createSymbol(row2);
 keyP.createSymbolLayout('eng', 'p', 'P');
 keyP.createSymbolLayout('ru', 'з', 'З');
 
-const keyBracketLeft = new KeySymbol('bracket-left');
+const keyBracketLeft = new KeySymbol('BracketLeft');
 keyBracketLeft.createSymbol(row2);
 keyBracketLeft.createSymbolLayout('eng', '[', '[');
 keyBracketLeft.createSymbolLayout('ru', 'х', 'Х');
 
-const keyBracketRight = new KeySymbol('bracket-right');
+const keyBracketRight = new KeySymbol('BracketRight');
 keyBracketRight.createSymbol(row2);
 keyBracketRight.createSymbolLayout('eng', ']', ']');
 keyBracketRight.createSymbolLayout('ru', 'ъ', 'Ъ');
 
-const keyBackslash = new KeySymbol('backslash');
+const keyBackslash = new KeySymbol('Backslash');
 keyBackslash.createSymbol(row2);
 keyBackslash.createSymbolLayout('eng', '\\', '|');
 keyBackslash.createSymbolLayout('ru', '\\', '/');
 
-const keyDelete = new Key('delete', 'Del');
+const keyDelete = new Key('Delete', 'Del');
 keyDelete.create(row2, 'key_size_xs');
 
 // Third row
-const keyCapsLock = new Key('caps-lock', 'CapsLock');
+const keyCapsLock = new Key('CapsLock', 'CapsLock');
 keyCapsLock.create(row3, 'key_size_l');
 
-const keyA = new KeySymbol('key-a');
+const keyA = new KeySymbol('KeyA');
 keyA.createSymbol(row3);
 keyA.createSymbolLayout('eng', 'a', 'A');
 keyA.createSymbolLayout('ru', 'ф', 'Ф');
 
-const keyS = new KeySymbol('key-s');
+const keyS = new KeySymbol('KeyS');
 keyS.createSymbol(row3);
 keyS.createSymbolLayout('eng', 's', 'S');
 keyS.createSymbolLayout('ru', 'ы', 'Ы');
 
-const keyD = new KeySymbol('key-d');
+const keyD = new KeySymbol('KeyD');
 keyD.createSymbol(row3);
 keyD.createSymbolLayout('eng', 'd', 'D');
 keyD.createSymbolLayout('ru', 'в', 'В');
 
-const keyF = new KeySymbol('key-f');
+const keyF = new KeySymbol('KeyF');
 keyF.createSymbol(row3);
 keyF.createSymbolLayout('eng', 'f', 'F');
 keyF.createSymbolLayout('ru', 'а', 'А');
 
-const keyG = new KeySymbol('key-g');
+const keyG = new KeySymbol('KeyG');
 keyG.createSymbol(row3);
 keyG.createSymbolLayout('eng', 'g', 'G');
 keyG.createSymbolLayout('ru', 'п', 'П');
 
-const keyH = new KeySymbol('key-h');
+const keyH = new KeySymbol('KeyH');
 keyH.createSymbol(row3);
 keyH.createSymbolLayout('eng', 'h', 'H');
 keyH.createSymbolLayout('ru', 'р', 'Р');
 
-const keyJ = new KeySymbol('key-j');
+const keyJ = new KeySymbol('KeyJ');
 keyJ.createSymbol(row3);
 keyJ.createSymbolLayout('eng', 'j', 'J');
 keyJ.createSymbolLayout('ru', 'о', 'О');
 
-const keyK = new KeySymbol('key-k');
+const keyK = new KeySymbol('KeyK');
 keyK.createSymbol(row3);
 keyK.createSymbolLayout('eng', 'k', 'K');
 keyK.createSymbolLayout('ru', 'л', 'Л');
 
-const keyL = new KeySymbol('key-l');
+const keyL = new KeySymbol('KeyL');
 keyL.createSymbol(row3);
 keyL.createSymbolLayout('eng', 'l', 'L');
 keyL.createSymbolLayout('ru', 'д', 'Д');
 
-const keySemicolon = new KeySymbol('semicolon');
+const keySemicolon = new KeySymbol('Semicolon');
 keySemicolon.createSymbol(row3);
 keySemicolon.createSymbolLayout('eng', ';', ':');
 keySemicolon.createSymbolLayout('ru', 'ж', 'Ж');
 
-const keyQuote = new KeySymbol('quote');
+const keyQuote = new KeySymbol('Quote');
 keyQuote.createSymbol(row3);
 keyQuote.createSymbolLayout('eng', '\'', '"');
 keyQuote.createSymbolLayout('ru', 'э', 'Э');
 
-const keyEnter = new Key('enter', 'Enter');
+const keyEnter = new Key('Enter', 'Enter');
 keyEnter.create(row3, 'key_size_m');
 
 // Fourth row
-const keyShiftLeft = new Key('shift-left', 'Shift');
+const keyShiftLeft = new Key('ShiftLeft', 'Shift');
 keyShiftLeft.create(row4, 'key_size_l');
 
-const keyZ = new KeySymbol('key-z');
+const keyZ = new KeySymbol('KeyZ');
 keyZ.createSymbol(row4);
 keyZ.createSymbolLayout('eng', 'z', 'Z');
 keyZ.createSymbolLayout('ru', 'я', 'Я');
 
-const keyX = new KeySymbol('key-x');
+const keyX = new KeySymbol('KeyX');
 keyX.createSymbol(row4);
 keyX.createSymbolLayout('eng', 'x', 'X');
 keyX.createSymbolLayout('ru', 'ч', 'Ч');
 
-const keyC = new KeySymbol('key-c');
+const keyC = new KeySymbol('KeyC');
 keyC.createSymbol(row4);
 keyC.createSymbolLayout('eng', 'c', 'C');
 keyC.createSymbolLayout('ru', 'с', 'С');
 
-const keyV = new KeySymbol('key-v');
+const keyV = new KeySymbol('KeyV');
 keyV.createSymbol(row4);
 keyV.createSymbolLayout('eng', 'v', 'V');
 keyV.createSymbolLayout('ru', 'м', 'М');
 
-const keyB = new KeySymbol('key-b');
+const keyB = new KeySymbol('KeyB');
 keyB.createSymbol(row4);
 keyB.createSymbolLayout('eng', 'b', 'B');
 keyB.createSymbolLayout('ru', 'и', 'И');
 
-const keyN = new KeySymbol('key-n');
+const keyN = new KeySymbol('KeyN');
 keyN.createSymbol(row4);
 keyN.createSymbolLayout('eng', 'n', 'N');
 keyN.createSymbolLayout('ru', 'т', 'Т');
 
-const keyM = new KeySymbol('key-m');
+const keyM = new KeySymbol('KeyM');
 keyM.createSymbol(row4);
 keyM.createSymbolLayout('eng', 'm', 'M');
 keyM.createSymbolLayout('ru', 'ь', 'Ь');
 
-const keyComma = new KeySymbol('comma');
+const keyComma = new KeySymbol('Comma');
 keyComma.createSymbol(row4);
 keyComma.createSymbolLayout('eng', ',', '<');
 keyComma.createSymbolLayout('ru', 'б', 'Б');
 
-const keyDot = new KeySymbol('key-dot');
+const keyDot = new KeySymbol('Period');
 keyDot.createSymbol(row4);
 keyDot.createSymbolLayout('eng', '.', '>');
 keyDot.createSymbolLayout('ru', 'ю', 'Ю');
 
-const keySlash = new KeySymbol('slash');
+const keySlash = new KeySymbol('Slash');
 keySlash.createSymbol(row4);
 keySlash.createSymbolLayout('eng', '/', '?');
 keySlash.createSymbolLayout('ru', '.', ',');
 
-const keyArrowUp = new Key('arrow-up', '▲');
+const keyArrowUp = new Key('ArrowUp', '▲');
 keyArrowUp.create(row4, 'key_color_accent');
 
-const keyShiftRight = new Key('shift-right', 'Shift');
+const keyShiftRight = new Key('ShiftRight', 'Shift');
 keyShiftRight.create(row4, 'key_size_m');
 
 // Fifth row
-const keyControlLeft = new Key('control-left', 'Ctrl');
+const keyControlLeft = new Key('ControlLeft', 'Ctrl');
 keyControlLeft.create(row5, 'key_color_accent');
 
-const keyMetaLeft = new Key('meta-left', 'Win');
+const keyMetaLeft = new Key('MetaLeft', 'Win');
 keyMetaLeft.create(row5, 'key_color_accent');
 
-const keyAltLeft = new Key('alt-left', 'Alt');
+const keyAltLeft = new Key('AltLeft', 'Alt');
 keyAltLeft.create(row5, 'key_color_accent');
 
-const keySpace = new Key('space');
+const keySpace = new Key('Space');
 keySpace.create(row5, 'key_size_xl');
 
-const keyAltRight = new Key('alt-right', 'Alt');
+const keyAltRight = new Key('AltRight', 'Alt');
 keyAltRight.create(row5, 'key_color_accent');
 
-const keyArrowLeft = new Key('arrow-left', '◄');
+const keyArrowLeft = new Key('ArrowLeft', '◄');
 keyArrowLeft.create(row5, 'key_color_accent');
 
-const keyArrowDown = new Key('arrow-down', '▼');
+const keyArrowDown = new Key('ArrowDown', '▼');
 keyArrowDown.create(row5, 'key_color_accent');
 
-const keyArrowRight = new Key('arrow-right', '►');
+const keyArrowRight = new Key('ArrowRight', '►');
 keyArrowRight.create(row5, 'key_color_accent');
 
-const keyControlRight = new Key('control-right', 'Ctrl');
+const keyControlRight = new Key('ControlRight', 'Ctrl');
 keyControlRight.create(row5, 'key_color_accent');
 
 // Adding text in input
 const typeText = ({ code, key, target }) => {
   if (target.classList.contains('screen')) return;
+  console.log(code)
+
+  const activeKey = document.querySelector(`#${code}`);
+  activeKey.classList.add(BASE_KEYS.includes(code) ? 'key-base' : 'active-heart');
 
   let { value } = screenKeyboard;
 
@@ -360,5 +366,10 @@ const typeText = ({ code, key, target }) => {
   screenKeyboard.value = value;
 };
 
+const removeActiveKeyAnimation = ({ code }) => {
+  document.querySelector(`#${code}`).classList.remove(BASE_KEYS.includes(code) ? 'key-base' : 'active-heart');
+};
+
 // Event Handlers
 document.addEventListener('keydown', (evt) => typeText(evt));
+document.addEventListener('keyup', (evt) => removeActiveKeyAnimation(evt));

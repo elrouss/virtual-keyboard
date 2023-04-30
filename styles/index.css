@@ -5,6 +5,10 @@
   justify-content: center;
 }
 
+.key {
+  transition: all 0.25s ease;
+}
+
 body,
 h1,
 p,
@@ -85,6 +89,10 @@ html::before {
   background-color: #ffd2da;
   cursor: pointer;
 }
+.key > * {
+  position: relative;
+  z-index: 100;
+}
 .key_size_xs {
   width: 44px;
   font-weight: 600;
@@ -111,6 +119,35 @@ html::before {
 .key_color_accent {
   font-weight: 600;
   background-color: #fb9eaf;
+}
+
+.key-base {
+  border-radius: 50%;
+}
+
+.active-heart {
+  position: relative;
+  background-color: #d10a82;
+  transform: rotate(360deg);
+}
+.active-heart::before, .active-heart::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 25px;
+  height: 100%;
+  border-radius: 25px 25px 0 0;
+  background-color: #ffbbc7;
+}
+.active-heart::before {
+  left: 19.5px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+.active-heart::after {
+  left: -4.5px;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
 }
 
 .hidden {
