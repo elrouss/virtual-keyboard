@@ -4,7 +4,8 @@ export default class Key {
     this.char = char;
   }
 
-  _createElement(tag, style, styleModifier) {
+  // NB! This is a private method (can not put dangling due to the rules of the task)
+  createElement(tag, style, styleModifier) {
     this.element = document.createElement(tag);
     this.element.className = style;
 
@@ -14,7 +15,7 @@ export default class Key {
   }
 
   create(row, styleModifier) {
-    const key = this._createElement('div', 'key', styleModifier);
+    const key = this.createElement('div', 'key', styleModifier);
 
     key.id = this.name;
     key.textContent = this.char;

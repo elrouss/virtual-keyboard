@@ -149,13 +149,13 @@ const layoutEn = Array.from(keys.querySelectorAll('.en'));
 const layoutEnKeysCaseDown = layoutEn.map((layout) => layout.querySelector('.case-down'));
 const layoutEnKeysCaseUp = layoutEn.map((layout) => layout.querySelector('.case-up'));
 const layoutEnKeysCaps = layoutEn.map((layout) => layout.querySelector('.caps'));
-const layoutEnKeysShiftCaps = layoutEn.map((layout) => layout.querySelector('.shift-caps'));
+// const layoutEnKeysShiftCaps = layoutEn.map((layout) => layout.querySelector('.shift-caps'));
 
 const layoutRu = Array.from(keys.querySelectorAll('.ru'));
 const layoutRuKeysCaseDown = layoutRu.map((layout) => layout.querySelector('.case-down'));
 const layoutRuKeysCaseUp = layoutRu.map((layout) => layout.querySelector('.case-up'));
 const layoutRuKeysCaps = layoutRu.map((layout) => layout.querySelector('.caps'));
-const layoutRuKeysShiftCaps = layoutRu.map((layout) => layout.querySelector('.shift-caps'));
+// const layoutRuKeysShiftCaps = layoutRu.map((layout) => layout.querySelector('.shift-caps'));
 
 // Typing with keyboard
 // TODO: Caps + Shift = BUG!!! (shift-caps)
