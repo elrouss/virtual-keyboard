@@ -40,6 +40,9 @@ const keys = createBlockElement('ul', 'keys');
 const heading = createTextElement('h1', 'heading', 'RSS Virtual Keyboard');
 const operationSystem = createTextElement('p', 'paragraph', 'The keyboard was created for Windows operating system');
 const combinationKeys = createTextElement('p', 'paragraph', 'Combination to switch keyboard language: Ctrl + Alt(Opt)');
+// const audioBackground = new Audio('./assets/audio/barbie-girl.mp3');
+// audioBackground.className = 'audio';
+// audioBackground.controls = true;
 
 // Inserting elements
 body.prepend(section);
@@ -158,32 +161,13 @@ const layoutRuKeysCaps = layoutRu.map((layout) => layout.querySelector('.caps'))
 const layoutRuKeysShiftCaps = layoutRu.map((layout) => layout.querySelector('.shift-caps'));
 
 // Typing with keyboard
-const typeText = ({ code, key, target }) => {
+const typeText = ({ code }) => {
   const activeKey = keys.querySelector(`#${code}`);
-  activeKey.classList.add(BASE_KEYS.includes(code) || ARROWS_KEYS.includes(code) ? 'key-base' : 'active-heart');
-  // TODO: при клике на инпут идет пользовательская раскладка, а не моя ;(
-  let valueTyped;
-
-  if (ARROWS_KEYS.includes(code)) {
-    valueTyped = activeKey.textContent;
-  } else if (!BASE_KEYS.includes(code)) {
-    valueTyped = activeKey
-      .querySelector('span.en:not(.hidden), span.ru:not(.hidden)')
-      .querySelector('span:not(.hidden)')
-      .textContent;
-  }
-
-  if (target.classList.contains('screen')) return;
-
-  let { value } = screenKeyboard;
-
-  if (valueTyped) value += valueTyped;
-  if (key === 'Backspace') value = value.slice(0, value.length - 1);
-  if (key === 'Enter') value += '\n';
-  if (key === 'Tab') value += '    ';
-  if (code === 'Space') value += ' ';
-
-  screenKeyboard.value = value;
+  activeKey
+    .classList
+    .add(BASE_KEYS.includes(code) || ARROWS_KEYS.includes(code)
+      ? 'key-base'
+      : 'active-heart');
 };
 
 let keysPressedLang = [];
@@ -216,21 +200,16 @@ const handleLayoutOff = () => {
 
 let targetClicked;
 let targetBaseClicked;
-// console.log(screenKeyboard)
 
 const handleKeyClickOn = ({ target }) => {
   const closest = target.closest('.key');
   const { id } = target;
 
-  // const cursorInputStart = screenKeyboard.selectionStart;
-  // const cursorInputEnd = screenKeyboard.selectionEnd;
   let text;
-  // console.log(cursorInputStart, cursorInputEnd)
 
-  if (ARROWS_KEYS.includes(id)) {
-    text = closest.textContent;
-  } else if (
+  if (
     !BASE_KEYS.includes(id)
+    && !ARROWS_KEYS.includes(id)
     && target.className !== 'keys'
     && target.className !== 'keys__row'
   ) {
@@ -240,26 +219,56 @@ const handleKeyClickOn = ({ target }) => {
       .textContent;
   }
 
-  let { value } = screenKeyboard;
-
-  if (text) {
-    closest.classList.add(ARROWS_KEYS.includes(id) ? 'key-base' : 'active-heart');
-    targetClicked = closest;
-    value += text;
-  }
-
-  if (BASE_KEYS.includes(id)) {
+  if (BASE_KEYS.includes(id) || ARROWS_KEYS.includes(id)) {
     closest.classList.add('key-base');
     targetBaseClicked = closest;
   }
 
-  if (id === 'Backspace') value = value.slice(0, value.length - 1);
-  // if (id === 'Delete') console.log('test');
-  if (id === 'Enter') value += '\n';
-  if (id === 'Tab') value += '    ';
-  if (id === 'Space') value += ' ';
+  if (text) {
+    closest
+      .classList
+      .add(ARROWS_KEYS.includes(id) ? 'key-base' : 'active-heart');
 
-  screenKeyboard.value = value;
+    targetClicked = closest;
+  }
+
+  const copy = screenKeyboard.value;
+  let cursorPosition = screenKeyboard.selectionStart;
+  let copyLeft = copy.slice(0, cursorPosition);
+  let copyRight = copy.slice(cursorPosition);
+
+  if (id === 'Enter') text = '\n';
+  if (id === 'Tab') text = '\t';
+  if (id === 'Space') text = ' ';
+
+  if (id === 'Backspace') {
+    copyLeft = copy.slice(0, cursorPosition - 1);
+    cursorPosition -= 1;
+  }
+
+  if (id === 'Delete') {
+    copyRight = copy.slice(cursorPosition + 1);
+  }
+
+  screenKeyboard.value = `${copyLeft}${text || ''}${copyRight}`;
+
+  if (text) cursorPosition += 1;
+
+  if (id === 'ArrowUp') {
+    const counter = copy.slice(0, cursorPosition).match(/(\n).*$(?!\1)/g) || [1];
+    cursorPosition -= counter[0].length;
+  }
+
+  if (id === 'ArrowDown') {
+    const counter = copy.slice(cursorPosition).match(/^.*(\n).*(?!\1)/) || [[1]];
+    cursorPosition += counter[0].length;
+  }
+
+  if (id === 'ArrowRight') cursorPosition += 1;
+  if (id === 'ArrowLeft') cursorPosition -= 1;
+
+  screenKeyboard.setSelectionRange(cursorPosition, cursorPosition);
+  screenKeyboard.focus();
 };
 
 const handleKeyClickOff = () => {
@@ -441,6 +450,10 @@ const handleKeysCombinationsShiftAndCapsLockOff = ({ key, target }) => {
 };
 
 // Event Handlers
+window.addEventListener('DOMContentLoaded', () => {
+  screenKeyboard.focus();
+});
+
 document.addEventListener('keydown', (evt) => {
   typeText(evt);
   handleLayoutOn(evt);
@@ -462,3 +475,5 @@ document.addEventListener('mouseup', (evt) => {
   handleKeyClickOff();
   handleKeysCombinationsShiftAndCapsLockOff(evt);
 });
+
+screenKeyboard.addEventListener('blur', () => screenKeyboard.focus());
