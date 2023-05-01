@@ -158,7 +158,6 @@ const layoutRuKeysCaps = layoutRu.map((layout) => layout.querySelector('.caps'))
 const layoutRuKeysShiftCaps = layoutRu.map((layout) => layout.querySelector('.shift-caps'));
 
 // Typing with keyboard
-// TODO: Caps + Shift = BUG!!! (shift-caps)
 const typeText = ({ code, key, target }) => {
   const activeKey = keys.querySelector(`#${code}`);
   activeKey.classList.add(BASE_KEYS.includes(code) || ARROWS_KEYS.includes(code) ? 'key-base' : 'active-heart');
@@ -187,23 +186,12 @@ const typeText = ({ code, key, target }) => {
   screenKeyboard.value = value;
 };
 
-let keysPressed = [];
+let keysPressedLang = [];
 
 const handleLayoutOn = ({ key }) => {
-  keysPressed.push(key);
+  keysPressedLang.push(key);
 
-  // if (keysPressed.includes('Shift') && keysPressed.includes('CapsLock')) {
-  // layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
-  // layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
-
-  // layoutEnKeysCaseDown.map((caps) => caps.classList.add('hidden'));
-  // layoutRuKeysCaseDown.map((caps) => caps.classList.add('hidden'));
-
-  // layoutEnKeysCaps.map((caps) => caps.classList.add('hidden'));
-  // layoutRuKeysCaps.map((caps) => caps.classList.add('hidden'));
-  // }
-
-  if (keysPressed.includes('Control') && keysPressed.includes('Alt')) {
+  if (keysPressedLang.includes('Control') && keysPressedLang.includes('Alt')) {
     language = localStorage.getItem('lang');
 
     layoutEn.forEach((spanEn) => {
@@ -223,126 +211,7 @@ const handleLayoutOn = ({ key }) => {
 };
 
 const handleLayoutOff = () => {
-  keysPressed = [];
-};
-
-// TODO: функции ниже объединить?
-let isCapsLockOn = false;
-
-// const handleKeysCombinationsOn = ({ key, target: { id } }) => {
-//   if (key === 'Shift' || id.startsWith('Shift')) {
-//     layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
-//     layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
-
-//     layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.remove('hidden'));
-//     layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.remove('hidden'));
-//   }
-
-//   if (key === 'CapsLock' && !isCapsLockOn) {
-//     isCapsLockOn = true;
-
-//     layoutEnKeysCaps.map((caps) => caps.classList.remove('hidden'));
-//     layoutRuKeysCaps.map((caps) => caps.classList.remove('hidden'));
-
-//     layoutEnKeysCaseDown.map((caps) => caps.classList.add('hidden'));
-//     layoutRuKeysCaseDown.map((caps) => caps.classList.add('hidden'));
-//   }
-
-//   if (id === 'CapsLock') {
-//     if (isCapsLockOn) {
-//       isCapsLockOn = false;
-
-//       layoutEnKeysCaseDown.map((caps) => caps.classList.remove('hidden'));
-//       layoutRuKeysCaseDown.map((caps) => caps.classList.remove('hidden'));
-
-//       layoutEnKeysCaps.map((caps) => caps.classList.add('hidden'));
-//       layoutRuKeysCaps.map((caps) => caps.classList.add('hidden'));
-//     } else {
-//       isCapsLockOn = true;
-
-//       layoutEnKeysCaps.map((caps) => caps.classList.remove('hidden'));
-//       layoutRuKeysCaps.map((caps) => caps.classList.remove('hidden'));
-
-//       layoutEnKeysCaseDown.map((caps) => caps.classList.add('hidden'));
-//       layoutRuKeysCaseDown.map((caps) => caps.classList.add('hidden'));
-//     }
-//   }
-// };
-
-// const handleKeysCombinationsOff = ({ key, target }) => {
-//   if ((key === 'Shift') && target.id !== 'CapsLock') {
-//     console.log('test')
-//     layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.remove('hidden'));
-//     layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.remove('hidden'));
-
-//     layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
-//     layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
-//   }
-
-//   if (key === 'CapsLock' && isCapsLockOn) {
-//     isCapsLockOn = false;
-
-//     layoutEnKeysCaseDown.map((caps) => caps.classList.remove('hidden'));
-//     layoutRuKeysCaseDown.map((caps) => caps.classList.remove('hidden'));
-
-//     layoutEnKeysCaps.map((caps) => caps.classList.add('hidden'));
-//     layoutRuKeysCaps.map((caps) => caps.classList.add('hidden'));
-//   }
-// };
-
-const handleShiftOn = ({ key, target: { id } }) => {
-  if (key === 'Shift' || id.startsWith('Shift')) {
-    layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
-    layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
-
-    layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.remove('hidden'));
-    layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.remove('hidden'));
-  }
-};
-
-const handleShiftOff = ({ key, target: { id } }) => {
-  if (key === 'Shift' || id.startsWith('Shift')) {
-    layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.remove('hidden'));
-    layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.remove('hidden'));
-
-    layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
-    layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
-  }
-};
-
-const handleCapsLock = ({ key, code, target }) => {
-  const { id } = target;
-
-  if (key === 'CapsLock' || id === 'CapsLock') {
-    if (!isCapsLockOn) {
-      isCapsLockOn = true;
-
-      layoutEnKeysCaps.map((caps) => caps.classList.remove('hidden'));
-      layoutRuKeysCaps.map((caps) => caps.classList.remove('hidden'));
-
-      layoutEnKeysCaseDown.map((caps) => caps.classList.add('hidden'));
-      layoutRuKeysCaseDown.map((caps) => caps.classList.add('hidden'));
-    } else {
-      isCapsLockOn = false;
-
-      if (id === 'CapsLock') {
-        target.classList.remove('key-base');
-      }
-
-      if (key === 'CapsLock') {
-        keys
-          .querySelector(`#${code}`)
-          .classList
-          .remove('key-base');
-      }
-
-      layoutEnKeysCaseDown.map((caps) => caps.classList.remove('hidden'));
-      layoutRuKeysCaseDown.map((caps) => caps.classList.remove('hidden'));
-
-      layoutEnKeysCaps.map((caps) => caps.classList.add('hidden'));
-      layoutRuKeysCaps.map((caps) => caps.classList.add('hidden'));
-    }
-  }
+  keysPressedLang = [];
 };
 
 let targetClicked;
@@ -412,32 +281,184 @@ const removeActiveKeyAnimation = ({ code }) => {
     .remove((BASE_KEYS.includes(code) || ARROWS_KEYS.includes(code)) && code !== 'CapsLock' ? 'key-base' : 'active-heart');
 };
 
+const keysCombinationsShiftAndCapsLock = {
+  CapsLock: 0,
+  Shift: 0,
+};
+
+const handleKeysCombinationsShiftAndCapsLock = ({ key, code, target }) => {
+  const { id } = target;
+
+  if (key === 'Shift' || id.startsWith('Shift')) {
+    keysCombinationsShiftAndCapsLock.Shift += 1;
+  }
+
+  if (key === 'CapsLock' || id === 'CapsLock') {
+    if (!keysCombinationsShiftAndCapsLock.CapsLock) {
+      keysCombinationsShiftAndCapsLock.CapsLock += 1;
+
+      if (id) {
+        target.classList.add('key-base');
+      } else {
+        keys
+          .querySelector(`#${code}`)
+          .classList
+          .add('key-base');
+      }
+    } else {
+      keysCombinationsShiftAndCapsLock.CapsLock -= 1;
+
+      if (id) {
+        target.classList.remove('key-base');
+      } else {
+        keys
+          .querySelector(`#${code}`)
+          .classList
+          .remove('key-base');
+      }
+    }
+  }
+
+  if (keysCombinationsShiftAndCapsLock.Shift && keysCombinationsShiftAndCapsLock.CapsLock) {
+    layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
+    layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
+
+    layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
+    layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
+
+    layoutEnKeysCaps.map((caps) => caps.classList.add('hidden'));
+    layoutRuKeysCaps.map((caps) => caps.classList.add('hidden'));
+
+    layoutEnKeysShiftCaps.map((btn) => btn.classList.remove('hidden'));
+    layoutRuKeysShiftCaps.map((btn) => btn.classList.remove('hidden'));
+  }
+
+  if (keysCombinationsShiftAndCapsLock.Shift && !keysCombinationsShiftAndCapsLock.CapsLock) {
+    layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
+    layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
+
+    layoutEnKeysCaps.map((caps) => caps.classList.add('hidden'));
+    layoutRuKeysCaps.map((caps) => caps.classList.add('hidden'));
+
+    layoutEnKeysShiftCaps.map((btn) => btn.classList.add('hidden'));
+    layoutRuKeysShiftCaps.map((btn) => btn.classList.add('hidden'));
+
+    layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.remove('hidden'));
+    layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.remove('hidden'));
+  }
+
+  if (!keysCombinationsShiftAndCapsLock.Shift && keysCombinationsShiftAndCapsLock.CapsLock) {
+    layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
+    layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
+
+    layoutEnKeysShiftCaps.map((btn) => btn.classList.add('hidden'));
+    layoutRuKeysShiftCaps.map((btn) => btn.classList.add('hidden'));
+
+    layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
+    layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
+
+    layoutEnKeysCaps.map((caps) => caps.classList.remove('hidden'));
+    layoutRuKeysCaps.map((caps) => caps.classList.remove('hidden'));
+  }
+
+  if (!keysCombinationsShiftAndCapsLock.Shift && !keysCombinationsShiftAndCapsLock.CapsLock) {
+    layoutEnKeysShiftCaps.map((btn) => btn.classList.add('hidden'));
+    layoutRuKeysShiftCaps.map((btn) => btn.classList.add('hidden'));
+
+    layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
+    layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
+
+    layoutEnKeysCaps.map((caps) => caps.classList.add('hidden'));
+    layoutRuKeysCaps.map((caps) => caps.classList.add('hidden'));
+
+    layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.remove('hidden'));
+    layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.remove('hidden'));
+  }
+};
+
+const handleKeysCombinationsShiftAndCapsLockOff = ({ key, target }) => {
+  const { id } = target;
+
+  if (key === 'Shift' || id.startsWith('Shift')) {
+    keysCombinationsShiftAndCapsLock.Shift -= 1;
+  }
+
+  if (keysCombinationsShiftAndCapsLock.Shift && keysCombinationsShiftAndCapsLock.CapsLock) {
+    layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
+    layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
+
+    layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
+    layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
+
+    layoutEnKeysCaps.map((caps) => caps.classList.add('hidden'));
+    layoutRuKeysCaps.map((caps) => caps.classList.add('hidden'));
+
+    layoutEnKeysShiftCaps.map((btn) => btn.classList.remove('hidden'));
+    layoutRuKeysShiftCaps.map((btn) => btn.classList.remove('hidden'));
+  }
+
+  if (keysCombinationsShiftAndCapsLock.Shift && !keysCombinationsShiftAndCapsLock.CapsLock) {
+    layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
+    layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
+
+    layoutEnKeysCaps.map((caps) => caps.classList.add('hidden'));
+    layoutRuKeysCaps.map((caps) => caps.classList.add('hidden'));
+
+    layoutEnKeysShiftCaps.map((btn) => btn.classList.add('hidden'));
+    layoutRuKeysShiftCaps.map((btn) => btn.classList.add('hidden'));
+
+    layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.remove('hidden'));
+    layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.remove('hidden'));
+  }
+
+  if (!keysCombinationsShiftAndCapsLock.Shift && keysCombinationsShiftAndCapsLock.CapsLock) {
+    layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
+    layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.add('hidden'));
+
+    layoutEnKeysShiftCaps.map((btn) => btn.classList.add('hidden'));
+    layoutRuKeysShiftCaps.map((btn) => btn.classList.add('hidden'));
+
+    layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
+    layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
+
+    layoutEnKeysCaps.map((caps) => caps.classList.remove('hidden'));
+    layoutRuKeysCaps.map((caps) => caps.classList.remove('hidden'));
+  }
+
+  if (!keysCombinationsShiftAndCapsLock.Shift && !keysCombinationsShiftAndCapsLock.CapsLock) {
+    layoutEnKeysShiftCaps.map((btn) => btn.classList.add('hidden'));
+    layoutRuKeysShiftCaps.map((btn) => btn.classList.add('hidden'));
+
+    layoutEnKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
+    layoutRuKeysCaseUp.map((caseUp) => caseUp.classList.add('hidden'));
+
+    layoutEnKeysCaps.map((caps) => caps.classList.add('hidden'));
+    layoutRuKeysCaps.map((caps) => caps.classList.add('hidden'));
+
+    layoutEnKeysCaseDown.map((caseDown) => caseDown.classList.remove('hidden'));
+    layoutRuKeysCaseDown.map((caseDown) => caseDown.classList.remove('hidden'));
+  }
+};
+
 // Event Handlers
 document.addEventListener('keydown', (evt) => {
   typeText(evt);
   handleLayoutOn(evt);
-  handleShiftOn(evt);
-  handleCapsLock(evt);
-  // handleKeysCombinationsOn(evt);
+  handleKeysCombinationsShiftAndCapsLock(evt);
 });
 
 document.addEventListener('keyup', (evt) => {
   handleLayoutOff();
-  handleShiftOff(evt);
-  handleCapsLock(evt);
-  // handleKeysCombinationsOff(evt);
+  handleKeysCombinationsShiftAndCapsLockOff(evt);
   removeActiveKeyAnimation(evt);
 });
 
 keys.addEventListener('mousedown', (evt) => {
   handleKeyClickOn(evt);
-  handleShiftOn(evt);
-  handleCapsLock(evt);
-  // handleKeysCombinationsOn(evt);
+  handleKeysCombinationsShiftAndCapsLock(evt);
 });
 
 document.addEventListener('mouseup', (evt) => {
   handleKeyClickOff();
-  handleShiftOff(evt);
-  // handleKeysCombinationsOff(evt);
+  handleKeysCombinationsShiftAndCapsLockOff(evt);
 });
