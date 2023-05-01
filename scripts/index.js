@@ -285,7 +285,7 @@ const handleKeyClickOn = ({ target }) => {
   let { value } = screenKeyboard;
 
   if (text) {
-    closest.classList.add('active-heart');
+    closest.classList.add(ARROWS_KEYS.includes(id) ? 'key-base' : 'active-heart');
     targetClicked = closest;
     value += text;
   }
@@ -309,9 +309,8 @@ const handleKeyClickOff = () => {
     targetBaseClicked.classList.remove('key-base');
     targetBaseClicked = undefined;
   }
-
-  if (targetClicked && targetClicked.classList.contains('active-heart')) {
-    targetClicked.classList.remove('active-heart');
+  if (targetClicked && (targetClicked.classList.contains('active-heart') || targetClicked.classList.contains('key-base'))) {
+    targetClicked.classList.remove(ARROWS_KEYS.includes(targetClicked.id) ? 'key-base' : 'active-heart');
     targetClicked = undefined;
   }
 };
