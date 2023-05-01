@@ -40,14 +40,15 @@ const keys = createBlockElement('ul', 'keys');
 const heading = createTextElement('h1', 'heading', 'RSS Virtual Keyboard');
 const operationSystem = createTextElement('p', 'paragraph', 'The keyboard was created for Windows operating system');
 const combinationKeys = createTextElement('p', 'paragraph', 'Combination to switch keyboard language: Ctrl + Alt(Opt)');
-// const audioBackground = new Audio('./assets/audio/barbie-girl.mp3');
-// audioBackground.className = 'audio';
-// audioBackground.controls = true;
+const wish = createTextElement('p', 'paragraph', 'Enjoy! 💅🏻');
+const audioBackground = new Audio('./assets/audio/barbie-girl.mp3');
+audioBackground.className = 'audio';
+audioBackground.controls = true;
 
 // Inserting elements
 body.prepend(section);
 section.append(wrapper);
-wrapper.append(heading, keyboard, operationSystem, combinationKeys);
+wrapper.append(heading, keyboard, operationSystem, combinationKeys, wish, audioBackground);
 keyboard.append(screenKeyboard, keys);
 
 const createKeysRow = () => {

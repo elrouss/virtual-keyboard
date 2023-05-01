@@ -44,7 +44,7 @@ html::before {
 }
 
 .section {
-  margin: 7vh 0;
+  margin: 2vh 0;
 }
 
 .wrapper {
@@ -65,6 +65,9 @@ html::before {
   line-height: 133%;
   color: #d10a82;
 }
+.paragraph:last-of-type {
+  margin-bottom: 1.6vh;
+}
 
 .keyboard {
   row-gap: 8px;
@@ -74,8 +77,9 @@ html::before {
 }
 
 .screen {
-  width: 100%;
-  height: 200px;
+  width: 110%;
+  resize: none;
+  height: 250px;
   padding: 5px;
   font-family: inherit;
   font-size: 1.8rem;
@@ -83,6 +87,7 @@ html::before {
   border: 3px solid #9f0e67;
   outline: none;
   background-color: #ffdee4;
+  border-radius: 6px;
 }
 .screen:focus {
   border-color: #d10a82;
@@ -146,7 +151,7 @@ html::before {
 }
 
 .key-base {
-  border-radius: 50%;
+  border-radius: 20px;
 }
 
 .active-heart {
@@ -175,6 +180,10 @@ html::before {
   left: -4.5px;
   transform: rotate(45deg);
   transform-origin: 100% 100%;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: #ffdee4;
 }
 
 .hidden {
