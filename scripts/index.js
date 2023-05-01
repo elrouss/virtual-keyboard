@@ -1,4 +1,4 @@
-import BASE_KEYS from './utils/constants.js';
+import { BASE_KEYS, ARROWS_KEYS } from './utils/constants.js';
 import KEYS_SYMBOL_VALUES from './utils/KEYS_SYMBOL_VALUES.js';
 
 import Key from './components/Key.js';
@@ -161,10 +161,13 @@ const layoutRuKeysCaps = layoutRu.map((layout) => layout.querySelector('.caps'))
 // TODO: Caps + Shift = BUG!!! (shift-caps)
 const typeText = ({ code, key, target }) => {
   const activeKey = keys.querySelector(`#${code}`);
-  activeKey.classList.add(BASE_KEYS.includes(code) ? 'key-base' : 'active-heart');
+  activeKey.classList.add(BASE_KEYS.includes(code) || ARROWS_KEYS.includes(code) ? 'key-base' : 'active-heart');
   // TODO: при клике на инпут идет пользовательская раскладка, а не моя ;(
   let valueTyped;
-  if (!BASE_KEYS.includes(code)) {
+
+  if (ARROWS_KEYS.includes(code)) {
+    valueTyped = activeKey.textContent;
+  } else if (!BASE_KEYS.includes(code)) {
     valueTyped = activeKey
       .querySelector('span.en:not(.hidden), span.ru:not(.hidden)')
       .querySelector('span:not(.hidden)')
@@ -175,7 +178,7 @@ const typeText = ({ code, key, target }) => {
 
   let { value } = screenKeyboard;
 
-  if (key.length === 1 && valueTyped) value += valueTyped;
+  if (valueTyped) value += valueTyped;
   if (key === 'Backspace') value = value.slice(0, value.length - 1);
   if (key === 'Enter') value += '\n';
   if (key === 'Tab') value += '    ';
@@ -265,7 +268,10 @@ const handleKeyClickOn = ({ target }) => {
   // const cursorInputEnd = screenKeyboard.selectionEnd;
   let text;
   // console.log(cursorInputStart, cursorInputEnd)
-  if (
+
+  if (ARROWS_KEYS.includes(id)) {
+    text = closest.textContent;
+  } else if (
     !BASE_KEYS.includes(id)
     && target.className !== 'keys'
     && target.className !== 'keys__row'
@@ -314,7 +320,7 @@ const removeActiveKeyAnimation = ({ code }) => {
   keys
     .querySelector(`#${code}`)
     .classList
-    .remove(BASE_KEYS.includes(code) ? 'key-base' : 'active-heart');
+    .remove(BASE_KEYS.includes(code) || ARROWS_KEYS.includes(code) ? 'key-base' : 'active-heart');
 };
 
 // Event Handlers

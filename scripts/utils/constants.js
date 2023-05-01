@@ -1,4 +1,4 @@
-const BASE_KEYS = [
+export const BASE_KEYS = [
   'Tab',
   'CapsLock',
   'ShiftLeft',
@@ -10,13 +10,14 @@ const BASE_KEYS = [
   'MetaRight',
   'ControlRight',
   'ShiftRight',
-  'ArrowUp',
-  'ArrowLeft',
-  'ArrowRight',
-  'ArrowDown',
   'Enter',
   'Delete',
   'Backspace',
 ];
 
-export default BASE_KEYS;
+export const ARROWS_KEYS = [
+  'ArrowUp',
+  'ArrowLeft',
+  'ArrowRight',
+  'ArrowDown',
+];
