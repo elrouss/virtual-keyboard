@@ -162,13 +162,63 @@ const layoutRuKeysCaps = layoutRu.map((layout) => layout.querySelector('.caps'))
 const layoutRuKeysShiftCaps = layoutRu.map((layout) => layout.querySelector('.shift-caps'));
 
 // Typing with keyboard
-const typeText = ({ code }) => {
+const typeText = (evt) => {
+  evt.preventDefault();
+
+  let text;
+
+  const { code } = evt;
   const activeKey = keys.querySelector(`#${code}`);
   activeKey
     .classList
     .add(BASE_KEYS.includes(code) || ARROWS_KEYS.includes(code)
       ? 'key-base'
       : 'active-heart');
+
+  if (!BASE_KEYS.includes(code) && !ARROWS_KEYS.includes(code)) {
+    text = document
+      .querySelector(`#${code}`)
+      .querySelector('span.en:not(.hidden), span.ru:not(.hidden)')
+      .querySelector('span:not(.hidden)')
+      .textContent;
+  }
+
+  const copy = screenKeyboard.value;
+  let cursorPosition = screenKeyboard.selectionStart;
+  let copyLeft = copy.slice(0, cursorPosition);
+  let copyRight = copy.slice(cursorPosition);
+
+  if (code === 'Enter') text = '\n';
+  if (code === 'Tab') text = '\t';
+  if (code === 'Space') text = ' ';
+
+  if (code === 'Backspace') {
+    copyLeft = copy.slice(0, cursorPosition - 1);
+    cursorPosition -= 1;
+  }
+
+  if (code === 'Delete') {
+    copyRight = copy.slice(cursorPosition + 1);
+  }
+
+  screenKeyboard.value = `${copyLeft}${text || ''}${copyRight}`;
+
+  if (text) cursorPosition += 1;
+
+  if (code === 'ArrowUp') {
+    const counter = copy.slice(0, cursorPosition).match(/(\n).*$(?!\1)/g) || [1];
+    cursorPosition -= counter[0].length;
+  }
+
+  if (code === 'ArrowDown') {
+    const counter = copy.slice(cursorPosition).match(/^.*(\n).*(?!\1)/) || [[1]];
+    cursorPosition += counter[0].length;
+  }
+
+  if (code === 'ArrowRight') cursorPosition += 1;
+  if (code === 'ArrowLeft') cursorPosition -= 1;
+
+  screenKeyboard.setSelectionRange(cursorPosition, cursorPosition);
 };
 
 let keysPressedLang = [];
