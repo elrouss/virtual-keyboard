@@ -1,0 +1,260 @@
+// Variables
+$color-keyboard-bg: #d10a82;
+$color-keyboard-main: #ffd2da;
+$color-keyboard-secondary: #ffdee4;
+$color-keyboard-key: #e91e63;
+$color-keyboard-border: #9f0e67;
+$color-keyboard-accent: #fb9eaf;
+$color-keyboard-animation: #ffbbc7;
+
+// Placeholders
+%flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+%animation {
+  transition: all 0.25s ease;
+}
+
+// Mixins
+@mixin border($width: 3px, $style: solid, $color: $color-keyboard-border) {
+  border: $width $style $color;
+}
+
+// Styles
+body,
+h1,
+p,
+ul,
+textarea {
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+}
+
+html {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  font-size: 10px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+
+    width: 100%;
+    height: 100%;
+
+    background-image: url(../assets/images/barbie-land.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    opacity: 0.4;
+  }
+}
+
+.page {
+  font-family: "Arial", "Helvetica", sans-serif;
+}
+
+.section {
+  margin: 2vh 0;
+}
+
+.wrapper {
+  @extend %flex-column;
+  width: 704px;
+  margin: 0 auto;
+}
+
+.heading {
+  font-size: 4rem;
+  font-style: italic;
+  color: $color-keyboard-bg;
+}
+
+.paragraph {
+  font-size: 1.7rem;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 133%;
+  color: $color-keyboard-bg;
+
+  &:last-of-type {
+    margin-bottom: 1.6vh;
+  }
+}
+
+.keyboard {
+  @extend %flex-column;
+  row-gap: 8px;
+  width: 100%;
+  margin: 2vh;
+
+  font-size: 1.5rem;
+}
+
+.screen {
+  width: 110%;
+  resize: none;
+  height: 250px;
+  padding: 5px;
+
+  font-family: inherit;
+  font-size: 1.8rem;
+  color: $color-keyboard-key;
+
+  @include border();
+  outline: none;
+  background-color: $color-keyboard-secondary;
+  border-radius: 6px;
+
+  &:focus {
+    border-color: $color-keyboard-bg;
+  }
+}
+
+.keys {
+  @extend %flex-column;
+  row-gap: 8px;
+  width: 100%;
+  padding: 5px;
+
+  background-color: $color-keyboard-bg;
+  @include border();
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+  }
+}
+
+.key {
+  @extend %flex-column;
+  width: 40px;
+  height: 100%;
+
+  color: $color-keyboard-key;
+
+  background-color: $color-keyboard-main;
+
+  user-select: none;
+  cursor: pointer;
+
+  @extend %animation;
+
+  &:hover {
+    background-color: $color-keyboard-animation;
+  }
+
+  > * {
+    position: relative;
+    z-index: 100;
+  }
+
+  &_size_xs {
+    width: 44px;
+
+    font-weight: 600;
+
+    background-color: $color-keyboard-accent;
+  }
+
+  &_size_s {
+    width: 50px;
+
+    font-weight: 600;
+
+    background-color: $color-keyboard-accent;
+  }
+
+  &_size_m {
+    width: 86px;
+
+    font-weight: 600;
+
+    background-color: $color-keyboard-accent;
+  }
+
+  &_size_l {
+    width: 100px;
+
+    font-weight: 600;
+
+    background-color: $color-keyboard-accent;
+  }
+
+  &_size_xl {
+    width: 330px;
+  }
+
+  &_color_accent {
+    font-weight: 600;
+
+    background-color: $color-keyboard-accent;
+  }
+}
+
+.key-base {
+  border-radius: 20px;
+}
+
+.active-heart {
+  position: relative;
+
+  background-color: $color-keyboard-bg;
+
+  transform: rotate(360deg);
+
+  &:hover {
+    background-color: inherit;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+
+    width: 25px;
+    height: 100%;
+
+    border-radius: 25px 25px 0 0;
+    background-color: $color-keyboard-animation;
+  }
+
+  &::before {
+    left: 19.5px;
+
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+  }
+
+  &::after {
+    left: -4.5px;
+
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+  }
+}
+
+audio {
+  &::-webkit-media-controls-panel {
+    background-color: $color-keyboard-secondary;
+  }
+}
+
+.hidden {
+  display: none;
+}
